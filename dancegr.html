@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-7">
+
+<meta name="keywords" content="paschalis, giannis, giannis paschalis,rock, music, music composer"> 
+<meta name="description" content="giannis paschalis music composer "> 
+<meta name="author" content="Giannis Paschalis">
+<meta name="copyright"    content="Giannis Paschalis">
+
+
+
+<title>dancegr</title>
+<link href="my web2.css" rel="stylesheet" type="text/css" />
+
+
+<link rel="shortcut icon" type="image/x-icon" href="123.ico">
+
+
+
+
+
+
+
+<script type="text/javascript" src="mootools-1.2.4-core.js "></script>
+    <script type="text/javascript" src="mootools-cnet-debug.js"></script> 
+    <script type="text/javascript" src="IdleTimer.js"></script>
+        
+    <script type="text/javascript" src="AudioCheck-nc.js"></script>
+    <script type="text/javascript" src="mtAudioPlayer-nc.js"></script>
+    <script type="text/javascript" src="mtAudioPlayerUI-nc.js"></script>
+    <script type="text/javascript" src="mtAudioPlaylist-nc.js"></script>
+
+    <style type="text/css" media="screen">
+        #mooTunes{
+            margin:0 auto 100px;
+            width:300px;
+        }
+    </style>
+        
+    <link rel="stylesheet" href="mooTunes-nc.css" type="text/css" media="screen" title="mtAudio Player Style Sheet" charset="utf-8">
+    
+    <script type="text/javascript" charset="utf-8">
+        var mooTunes, playlist, mtPlayer, tinyToggle, tinyToggleTimer;
+
+        tinyToggle = function(){
+            this.name.fade("toggle");
+            this.artist.fade("toggle");
+        }
+        
+        
+
+        window.addEvent("domready", function(){
+            if(! new AudioCheck().check()){
+                document.body.adopt(new Element("p", { html : "Your browser does not HTML5 audio"}));
+                return;
+            }
+            
+           playlist = [ {artist : "Giannis Paschalis", mp3:"COURAGE OR TRUTH.mp3",ogg:"COURAGE OR TRUTH.ogg"}, 
+                        
+                        ];        
+     
+
+            
+           playlist = new mtAudioPlaylist( { tracks : playlist, parent : $("mooTunes") });
+           $(playlist).store("shrink", new Fx.Tween($(playlist), { onComplete: function(){ dbug.log("complete"); $(playlist).setStyle("display", "none"); } } ));
+           
+           mtPlayer = new mtAudioPlayer({ auto : true, volume : 10, tracks : playlist })
+                playlist.setPlayer(mtPlayer);
+          
+           mooTunes = new mtAudioPlayerUI( mtPlayer, { player : mtPlayer, parent : $('mooTunes'), noShrinker : $('mooTunes'), shrinkable : true, 
+                                            onShrink : function(){ 
+                                                    $(playlist).retrieve("shrink").start("opacity",0);
+                                                    mooTunes.readoutElems.artist.fade("hide");
+                                                    tinyToggleTimer = tinyToggle.periodical(2500, mooTunes.readoutElems);
+                                            }, 
+                                            onGrow : function(){ 
+                                                $(playlist).fade("in").setStyle("display", ""); 
+                                                tinyToggleTimer = $clear(tinyToggleTimer); 
+                                                 mooTunes.readoutElems.name.fade("show");
+                                                 mooTunes.readoutElems.artist.fade("show");
+                                            } 
+                                            }).inject();
+           playlist.inject();
+
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+
+<body>
+
+<div id="divWrapper">
+
+
+      <div id="divheader"><img src="logo4.png" />
+
+          <div id="divNav">
+              <ul>
+                  <li><a href="homegr.html">Αρχική</a></li>
+                  <li><a href="demosgr.html">Δείγματα</a></li>
+                  <li><a href="portfoliogr.html">Συνεργασίες</a></li>
+                  <li><a href="contactgr.html">Επικοινωνία</a></li>
+               </ul>
+           </div>
+      
+      </div>
+      
+      
+      
+      <div id="divabout">
+      <marquee behavior="slide" direction="up" scrollamount="150" width="840" height="600">
+      
+        <div id="dance">
+          <a href="demosgr.html"><img src="x2.png" width="50" height="50" /></a>
+            <div id="divaudio1">
+              
+       
+    
+                  <div id="mooTunes">
+        
+                  </div>
+        
+       
+            </div>   
+        
+        
+        </div>
+        
+      
+      </marquee>
+      
+      </div>
+      
+      <div id="flags">
+      <a href="dancegr.html"><img src="greekflag.png" alt="Greeks" /></a>
+      <a href="dance.html"><img src="englishflag.png" alt="Greeks" /></a>
+      </div>
+      
+      
+       <div id="footer"><h6>copyright and designed by : Giannis Paschalis</h6></div>
+      
+      
+</div>
+               
+</body>
+</html>
